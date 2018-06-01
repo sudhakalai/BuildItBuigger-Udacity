@@ -36,5 +36,4 @@ public class MyEndpoint {
         joke.setData(randomJoke);
         return joke;
     }
-
 }
