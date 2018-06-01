@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Pair;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -20,7 +22,21 @@ import java.io.IOException;
 
 class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiService = null;
-    private Context context;
+    private Context mContext;
+    private ProgressBar mProgressBar;
+
+    public EndpointsAsyncTask(Context context, ProgressBar progressBar) {
+        this.mContext = context;
+        this.mProgressBar = progressBar;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        if (mProgressBar != null) {
+            mProgressBar.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -42,19 +58,20 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
             myApiService = builder.build();
         }
 
-        context = params[0].first;
-        String name = params[0].second;
-
-        try {
-            return myApiService.sayHi(name).execute().getData();
+       try {
+            return myApiService.tellAJoke().execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }
+
     }
 
     @Override
     protected void onPostExecute(String result) {
+        if (mProgressBar != null) {
+            mProgressBar.setVisibility(View.GONE);
+        }
         Log.v("testingasynctask", result);
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        Toast.makeText(mContext, result, Toast.LENGTH_LONG).show();
     }
 }

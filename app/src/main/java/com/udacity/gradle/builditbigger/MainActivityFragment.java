@@ -1,13 +1,12 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -19,6 +18,7 @@ import com.google.android.gms.ads.AdView;
 public class MainActivityFragment extends Fragment {
 
     Button button;
+    ProgressBar progressBar;
 
     public MainActivityFragment() {
     }
@@ -29,6 +29,8 @@ public class MainActivityFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
         button = root.findViewById(R.id.jokeButton);
+        progressBar = (ProgressBar) root.findViewById(R.id.progressbar);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +57,6 @@ public class MainActivityFragment extends Fragment {
         intent.putExtra("JOKE_EXTRA", joke);
         startActivity(intent);*/
 
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(getContext(), "Manfred"));
+        new EndpointsAsyncTask(getContext(), progressBar).execute();
     }
 }
