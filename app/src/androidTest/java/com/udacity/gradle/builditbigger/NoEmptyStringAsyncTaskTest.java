@@ -17,10 +17,10 @@ public class NoEmptyStringAsyncTaskTest extends AndroidTestCase{
         try {
           EndpointsAsyncTask task = new EndpointsAsyncTask(getContext(), null);
             task.execute();
-            String joke = task.get(30, TimeUnit.SECONDS);
+            String jokes = task.get(30, TimeUnit.SECONDS);
 
-            assertThat(joke, notNullValue());
-            assertTrue(joke.length() > 0);
+            assertThat(jokes, notNullValue());
+            assertTrue(jokes.length() > 0);
 
         } catch (Exception e) {
             fail("Operation timed out");
