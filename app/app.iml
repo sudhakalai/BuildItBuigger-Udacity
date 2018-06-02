@@ -202,5 +202,9 @@
     <orderEntry type="module" module-name="javaJokesLibrary" />
     <orderEntry type="module" module-name="jokesandroidlibrary" />
     <orderEntry type="library" name="android-android-26" level="project" />
+    <orderEntry type="module" module-name="javaJokesLibrary" />
+    <orderEntry type="module" module-name="jokesandroidlibrary" />
+    <orderEntry type="module" module-name="javaJokesLibrary" />
+    <orderEntry type="module" module-name="jokesandroidlibrary" />
   </component>
 </module>
